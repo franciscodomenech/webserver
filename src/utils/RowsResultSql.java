@@ -16,6 +16,7 @@ public class RowsResultSql {
 			RowResultSql row = new RowResultSql(cn);
 			for(int i=0;i<cn;i++)
 				row.addCol(i, rs.getString(i+1));
+			_rows.add(row);
 		}
 		rs.close();
 	}
