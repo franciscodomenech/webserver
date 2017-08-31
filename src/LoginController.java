@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.Usuario;
 import model.Usuarios;
@@ -35,10 +36,14 @@ public class LoginController extends HttpServlet {
 		RequestDispatcher rd = null;
 		Usuario u = Usuarios.login(user, pass);
 		if (u==null) {
-			rd = request.getRequestDispatcher("/error.jsp");
+			rd = request.getRequestDispatcher("/error.jsp");//Redirecciona para cargar la pag
 		} else {
-			rd = request.getRequestDispatcher("/private.jsp");
-			request.setAttribute("user", u);
+			
+			HttpSession session = request.getSession();
+			session.setAttribute("u", u);
+			
+			//Llama a Private Controller
+			response.sendRedirect("/private");//@WebServlet("/private")
 		}
 		rd.forward(request, response);
 	}
