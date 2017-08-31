@@ -42,7 +42,7 @@ public class PrivateController extends HttpServlet {
 			rd = request.getRequestDispatcher("/login.jsp");
 		}
 		else {
-			
+			int tipo =user.get_tipo();
 			
 		}
 		//dependiendo de la sesion coge un menu u otro
