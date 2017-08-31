@@ -14,9 +14,9 @@ public class DataBase {
 	public final static int STRING = 1;
 	public final static int FLOAT = 2;
 	
-	private final static String URL = "jdbc:mysql://localhost:3306/portal";
+	private final static String URL = "jdbc:mysql://localhost:3306/cursojava";
 	private final static String USER = "root";
-	private final static String PASS = "test1234";
+	private final static String PASS = "mcg5791";
 	
 	private static Connection conn;
 	
