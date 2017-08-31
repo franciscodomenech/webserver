@@ -25,11 +25,6 @@ public class LoginController extends HttpServlet {
     public LoginController() {
     	super();
     }
-    
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = rd = request.getRequestDispatcher("/login.jsp");
-		rd.forward(request, response);
-	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

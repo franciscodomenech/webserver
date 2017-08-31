@@ -5,9 +5,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.mysql.jdbc.Driver;
+
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
-import com.mysql.jdbc.Statement;
 
 public class DataBase {
 	
@@ -15,7 +16,7 @@ public class DataBase {
 	public final static int STRING = 1;
 	public final static int FLOAT = 2;
 	
-	private final static String URL = "jdbc:mysql://localhost:3306/portal";
+	private final static String URL = "jdbc:mysql://localhost/portal";
 	private final static String USER = "root";
 	private final static String PASS = "test1234";
 	
@@ -24,9 +25,12 @@ public class DataBase {
 	private void init() {
 		if(conn==null) {
 			try {
+				Class.forName("com.mysql.jdbc.Driver");
 				conn = (Connection) DriverManager.getConnection(URL, USER, PASS);
 			} catch (SQLException e) {
 			    throw new IllegalStateException("Cannot connect the database!", e);
+			} catch (ClassNotFoundException e) {
+				throw new IllegalStateException("Class not found!", e);
 			}
 		}
 	}
