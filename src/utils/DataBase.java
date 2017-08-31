@@ -40,6 +40,8 @@ public class DataBase {
 	
 	public ResultSet get(String sql,List<BindValue> bind) throws SQLException {
 		PreparedStatement prep = preparaquery(sql,bind);
+		if(prep==null)
+			return null;
 		ResultSet result = prep.executeQuery();
 		prep.close();
 		close();
@@ -48,6 +50,8 @@ public class DataBase {
 	
 	public int update(String sql,List<BindValue> bind) throws SQLException {
 		PreparedStatement prep = preparaquery(sql,bind);
+		if(prep==null)
+			return -1;
 		int result = prep.executeUpdate();
 		prep.close();
 		close();
@@ -56,28 +60,25 @@ public class DataBase {
 	
 	private PreparedStatement preparaquery(String sql,List<BindValue> bind) throws SQLException {
 		init();
-		PreparedStatement prep = (PreparedStatement) conn.prepareStatement(sql);
-		for(int i=0;i<bind.size();i++) {
-			BindValue val = bind.get(i);
-			switch(val.getType()) {
-				case INTEGER:
-					prep.setInt(i,Integer.parseInt(val.getValue()));
-					break;
-				case STRING:
-					prep.setString(i,val.getValue());
-					break;
-				case FLOAT:
-					prep.setFloat(i,Float.parseFloat(val.getValue()));
-					break;
+		if(conn!=null) {
+			PreparedStatement prep = (PreparedStatement) conn.prepareStatement(sql);
+			for(int i=0;i<bind.size();i++) {
+				BindValue val = bind.get(i);
+				switch(val.getType()) {
+					case INTEGER:
+						prep.setInt(i,Integer.parseInt(val.getValue()));
+						break;
+					case STRING:
+						prep.setString(i,val.getValue());
+						break;
+					case FLOAT:
+						prep.setFloat(i,Float.parseFloat(val.getValue()));
+						break;
+				}
 			}
-		}
-		return prep;
-	}
-	
-	
-	public interface BindValue{
-		public int getType();
-		public String getValue();
+			return prep;
+		}else
+			return null;
 	}
 	
 }

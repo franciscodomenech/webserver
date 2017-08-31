@@ -3,7 +3,7 @@ package model;
 public class Usuario {
 	private int _tipo;
 	private int _id;
-	public Usuario(int _tipo, int _id) {
+	public Usuario(int _id,int _tipo) {
 		super();
 		this._tipo = _tipo;
 		this._id = _id;
