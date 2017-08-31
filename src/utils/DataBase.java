@@ -21,7 +21,7 @@ public class DataBase {
 	private static Connection conn;
 	
 	private void init() {
-		/*if(conn==null) {
+		if(conn==null) {
 			try {
 				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				conn = (Connection) DriverManager.getConnection(URL, USER, PASS);
@@ -37,7 +37,7 @@ public class DataBase {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}*/
+		}
 	}
 	
 	private void close() {
