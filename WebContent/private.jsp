@@ -14,7 +14,6 @@
 	<ul>
 	
 	<% 
-	
 	ArrayList<MenuItem> menu = (ArrayList<MenuItem>)request.getAttribute("menu");
 	for(int i=0;i<menu.size();i++){ %>
 	<li><a href="private?op=<%=i%>"><%= menu.get(i).getNombreItem() %></a></li>
