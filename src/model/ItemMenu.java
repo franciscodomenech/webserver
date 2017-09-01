@@ -1,9 +1,9 @@
 package model;
 
 public class ItemMenu {
-	public static final int CLIENTES = 0;
-	public static final int ARTICULOS = 0;
-	public static final int LOGOUT = 0;
+	public static final int CLIENTES = 1;
+	public static final int ARTICULOS = 2;
+	public static final int LOGOUT = 3;
 	private int op;
 	private String name;
 	public ItemMenu(int op, String name) {

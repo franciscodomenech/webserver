@@ -22,8 +22,11 @@ public class Menu {
 		
 		if(tipo==Usuario.ADMIN) {
 			menu.add(new ItemMenu(ItemMenu.CLIENTES,"CLIENTES"));
+			//System.out.println(ItemMenu.CLIENTES);
 			menu.add(new ItemMenu(ItemMenu.ARTICULOS,"ARTICULOS"));
+			//System.out.println(ItemMenu.ARTICULOS);
 			menu.add(new ItemMenu(ItemMenu.LOGOUT,"LOGOUT"));
+			//System.out.println(ItemMenu.LOGOUT);
 			
 		}else {
 			

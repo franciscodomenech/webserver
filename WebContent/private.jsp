@@ -33,7 +33,11 @@
 
 	<li><a href="private?op=<%=it.getOp()%>">Opcion <%=it.getName()%></a></li>
 
-	<% } %>
+
+	<% 
+		//System.out.println(it.getOp());
+	
+	} %>
 	</ul>
 
 	<div>${requestScope['op']}</div>
