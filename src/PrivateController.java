@@ -1,6 +1,7 @@
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.ItemMenu;
 import model.Usuario;
-import model.Usuarios;
 
 /**
  * Servlet implementation class LoginServlet
@@ -19,6 +20,8 @@ import model.Usuarios;
 @WebServlet("/private") //Se encarga de todas las llamadas de /private
 public class PrivateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	RequestDispatcher rd = null;
+	
 	
 
     /**
@@ -33,9 +36,9 @@ public class PrivateController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		RequestDispatcher rd = null;
 		HttpSession session = request.getSession();
 		Usuario user = (Usuario)session.getAttribute("u");
+		
 		if(user==null) {
 			
 			rd = request.getRequestDispatcher("/login.jsp");
@@ -43,17 +46,8 @@ public class PrivateController extends HttpServlet {
 		else {
 			
 			rd = request.getRequestDispatcher("/private.jsp");
-			int tipo =user.get_tipo();
-			String op = request.getParameter("op");
+			request.setAttribute("menu", createMenu(user));
 
-			if(op==null)
-
-				request.setAttribute("op", -1);
-
-			else
-
-				request.setAttribute("op", op);
-			
 			
 		}
 		rd.forward(request, response);
@@ -72,5 +66,28 @@ public class PrivateController extends HttpServlet {
 
 		doGet(request, response);
 
+	}
+	
+	private ArrayList<ItemMenu> createMenu(Usuario user) {
+		
+		int tipo =user.get_tipo();
+		
+		ArrayList<ItemMenu> menu = new ArrayList<ItemMenu>();
+		
+		if(tipo==Usuario.ADMIN) {
+			menu.add(new ItemMenu(ItemMenu.CLIENTES,"CLIENTES"));
+			menu.add(new ItemMenu(ItemMenu.ARTICULOS,"ARTICULOS"));
+			menu.add(new ItemMenu(ItemMenu.LOGOUT,"LOGOUT"));
+			
+		}else {
+			
+			menu.add(new ItemMenu(ItemMenu.ARTICULOS,"ARTICULOS"));
+			menu.add(new ItemMenu(ItemMenu.LOGOUT,"LOGOUT"));
+			
+		}
+		
+		return menu;
+		
+		
 	}
 }

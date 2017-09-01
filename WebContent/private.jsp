@@ -1,4 +1,6 @@
 
+<%@page import="model.ItemMenu"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 
     pageEncoding="ISO-8859-1"%>
@@ -21,9 +23,14 @@
 
 	
 
-	<% for(int i=0;i<3;i++){ %>
+	<%
+	
+	ArrayList<ItemMenu> menu = (ArrayList<ItemMenu>)request.getAttribute("menu");
+	
+	
+	for(int i=0;i<menu.size();i++){%>
 
-	<li><a href="private?op=<%=i%>">Opción <%=i%></a></li>
+	<li><a href="private?op=${requestScope['op']}">Opcion= ${requestScope['name']}</a></li>
 
 	<% } %>
 
