@@ -49,7 +49,7 @@ public class PrivateController extends HttpServlet {
 			rd = request.getRequestDispatcher("/private.jsp");
 			
 			
-			request.setAttribute("menu", new Menu(user));
+			request.setAttribute("menu", new Menu(user).createMenu());
 
 			
 		}
