@@ -1,5 +1,6 @@
 
 
+import java.awt.MenuItem;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -18,6 +19,10 @@ import model.Usuario;
  */
 @WebServlet("/private")
 public class PrivateController extends HttpServlet {
+	private int opcionArticulos=0;
+	private int cerrarSesion=1;
+	private int usuarios=2;
+	
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -36,18 +41,21 @@ public class PrivateController extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("/private.jsp");
 		HttpSession session = request.getSession();
 		Usuario user = (Usuario) session.getAttribute("u");
-		ArrayList<String> menu=new ArrayList<>();
+		
+		ArrayList<MenuItem> menu=new ArrayList<>();
+		
+		menu.add(new MenuItem("ARTICULOS"));
+		menu.add(new MenuItem("CERRAR SESION"));
 
-		menu.add("ARTICULOS");
-		menu.add("CERRAR SESION");
 		if (user.get_tipo()==0)
-			menu.add("CLIENTE");
+			menu.add(new MenuItem("USUARIOS"));
 		
 		String op = request.getParameter("op");
 		if(op==null)
 			request.setAttribute("op", -1);
 		else
 			request.setAttribute("op", op);
+		
 		request.setAttribute("menu", menu);
 		rd.forward(request, response);
 	}
