@@ -31,7 +31,7 @@
 		ItemMenu it = menu.get(i);
 	%>
 
-	<li><a href="private?op=<%=it.getOp()%>"><%=it.getName()%></a></li>
+	<li><a href="private?op=<%=it.getOp()%>">Opcion <%=it.getName()%></a></li>
 
 	<% } %>
 	</ul>

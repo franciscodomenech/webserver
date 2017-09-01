@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import model.ItemMenu;
 import model.Usuario;
+import model.Menu;
 
 /**
  * Servlet implementation class LoginServlet
@@ -46,7 +47,9 @@ public class PrivateController extends HttpServlet {
 		else {
 			
 			rd = request.getRequestDispatcher("/private.jsp");
-			request.setAttribute("menu", createMenu(user));
+			
+			
+			request.setAttribute("menu", new Menu(user));
 
 			
 		}
@@ -68,26 +71,4 @@ public class PrivateController extends HttpServlet {
 
 	}
 	
-	private ArrayList<ItemMenu> createMenu(Usuario user) {
-		
-		int tipo =user.get_tipo();
-		
-		ArrayList<ItemMenu> menu = new ArrayList<ItemMenu>();
-		
-		if(tipo==Usuario.ADMIN) {
-			menu.add(new ItemMenu(ItemMenu.CLIENTES,"CLIENTES"));
-			menu.add(new ItemMenu(ItemMenu.ARTICULOS,"ARTICULOS"));
-			menu.add(new ItemMenu(ItemMenu.LOGOUT,"LOGOUT"));
-			
-		}else {
-			
-			menu.add(new ItemMenu(ItemMenu.ARTICULOS,"ARTICULOS"));
-			menu.add(new ItemMenu(ItemMenu.LOGOUT,"LOGOUT"));
-			
-		}
-		
-		return menu;
-		
-		
-	}
 }
