@@ -18,7 +18,7 @@ import model.Usuarios;
  */
 @WebServlet("/private") //Se encarga de todas las llamadas de /private
 public class PrivateController extends HttpServlet {
-	private static final long serialVersionUID = 2L;
+	private static final long serialVersionUID = 1L;
 	
 
     /**
@@ -34,7 +34,6 @@ public class PrivateController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		RequestDispatcher rd = null;
-		
 		HttpSession session = request.getSession();
 		Usuario user = (Usuario)session.getAttribute("u");
 		if(user==null) {
@@ -42,12 +41,36 @@ public class PrivateController extends HttpServlet {
 			rd = request.getRequestDispatcher("/login.jsp");
 		}
 		else {
+			
+			rd = request.getRequestDispatcher("/private.jsp");
 			int tipo =user.get_tipo();
+			String op = request.getParameter("op");
+
+			if(op==null)
+
+				request.setAttribute("op", -1);
+
+			else
+
+				request.setAttribute("op", op);
+			
 			
 		}
-		//dependiendo de la sesion coge un menu u otro
-		
+		rd.forward(request, response);
 		
 	}
-	
+
+	/**
+
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+
+	 */
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		// TODO Auto-generated method stub
+
+		doGet(request, response);
+
+	}
 }

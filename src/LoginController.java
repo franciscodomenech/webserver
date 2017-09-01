@@ -37,15 +37,15 @@ public class LoginController extends HttpServlet {
 		Usuario u = Usuarios.login(user, pass);
 		if (u==null) {
 			rd = request.getRequestDispatcher("/error.jsp");//Redirecciona para cargar la pag
+			rd.forward(request, response);
 		} else {
 			
+			//Guardamos session
 			HttpSession session = request.getSession();
 			session.setAttribute("u", u);
-			
-			//Llama a Private Controller
-			response.sendRedirect("/private");//@WebServlet("/private")
+			//Llama a Private Controller,responde
+			response.sendRedirect("private");//@WebServlet("/private") por esto
 		}
-		rd.forward(request, response);
 	}
 
 }
