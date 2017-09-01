@@ -43,7 +43,6 @@ public class PrivateController extends HttpServlet {
 		if (user.get_tipo()==0)
 			menu.add("CLIENTE");
 		
-		
 		String op = request.getParameter("op");
 		if(op==null)
 			request.setAttribute("op", -1);
