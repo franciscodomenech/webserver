@@ -27,13 +27,13 @@
 	
 	ArrayList<ItemMenu> menu = (ArrayList<ItemMenu>)request.getAttribute("menu");
 	
-	
-	for(int i=0;i<menu.size();i++){%>
+	for(int i=0;i<menu.size();i++){
+		ItemMenu it = menu.get(i);
+	%>
 
-	<li><a href="private?op=${requestScope['op']}">Opcion= ${requestScope['name']}</a></li>
+	<li><a href="private?op=<%=it.getOp()%>"><%=it.getName()%></a></li>
 
 	<% } %>
-
 	</ul>
 
 	<div>${requestScope['op']}</div>
