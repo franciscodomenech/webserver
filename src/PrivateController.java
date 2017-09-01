@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.Menu;
 import model.Usuario;
 
 /**
@@ -35,11 +36,18 @@ public class PrivateController extends HttpServlet {
 		HttpSession session = request.getSession();
 		Usuario user = (Usuario) session.getAttribute("u");
 		String op = request.getParameter("op");
-		if(op==null)
+		
+		if(op==null) {
 			request.setAttribute("op", -1);
-		else
+		}
+		else {
 			request.setAttribute("op", op);
-		rd.forward(request, response);
+		}
+		
+		request.setAttribute("menu", new Menu(user.get_tipo()).get_Menu() );
+		
+		//Aquí ya es cuando se muestra la vista
+		rd.forward(request, response); 
 	}
 
 	/**
