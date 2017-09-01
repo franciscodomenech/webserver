@@ -7,7 +7,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-	tipo: ${requestScope['user']._tipo}.
-	id: ${requestScope['user']._id}.
+	<ul>
+	
+	<% for(int i=0;i<3;i++){ %>
+	<li><a href="private?op=<%=i%>">Opción <%=i%></a></li>
+	<% } %>
+	</ul>
+	<div>${requestScope['op']}</div>
 </body>
 </html>
