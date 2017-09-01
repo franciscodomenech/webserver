@@ -17,6 +17,6 @@
 	<li><a href="private?op=<%=i%>"><%= menu.get(i) %></a></li>
 	<% } %>
 	</ul>
-	<div>${requestScope['op']}</div>
+	<div>${requestScope['op']}</div> 
 </body>
 </html>
