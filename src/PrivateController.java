@@ -52,7 +52,7 @@ public class PrivateController extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("/private.jsp");
 		switch(status) {
 		case ItemMenu.CLIENTES:
-			showclientes(menu,request,response);
+			showclientes(menu,request,response); 
 			break;
 		case ItemMenu.ARTICULOS:
 			showarts(menu,request,response);
