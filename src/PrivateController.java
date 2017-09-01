@@ -1,6 +1,7 @@
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -25,6 +26,7 @@ public class PrivateController extends HttpServlet {
     public PrivateController() {
         super();
         // TODO Auto-generated constructor stub
+
     }
 
 	/**
@@ -34,11 +36,20 @@ public class PrivateController extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("/private.jsp");
 		HttpSession session = request.getSession();
 		Usuario user = (Usuario) session.getAttribute("u");
+		ArrayList<String> menu=new ArrayList<>();
+
+		menu.add("ARTICULOS");
+		menu.add("CERRAR SESION");
+		if (user.get_tipo()==0)
+			menu.add("CLIENTE");
+		
+		
 		String op = request.getParameter("op");
 		if(op==null)
 			request.setAttribute("op", -1);
 		else
 			request.setAttribute("op", op);
+		request.setAttribute("menu", menu);
 		rd.forward(request, response);
 	}
 

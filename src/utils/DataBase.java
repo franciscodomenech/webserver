@@ -16,7 +16,7 @@ public class DataBase {
 	
 	private final static String URL = "jdbc:mysql://localhost:3306/portal";
 	private final static String USER = "root";
-	private final static String PASS = "test1234";
+	private final static String PASS = "";
 	
 	private static Connection conn;
 	
