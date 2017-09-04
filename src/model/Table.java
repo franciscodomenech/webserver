@@ -1,30 +1,24 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import utils.RowResultSql;
 
 public abstract class Table implements ITable {
 
-	@Override
-	public ArrayList<Cliente> get() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArrayList<String> getColumnsHeaders(){
-		return null;
-	}
-
-	@Override
-	public Table filter() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Table orderBy(int numColumn) {
-		// TODO Auto-generated method stub
-		return null;
+	protected List<String> getRowList(RowResultSql row){
+		ArrayList<String> rowTableClientes= new ArrayList<String>();
+		try {
+										
+			for (int i=0; i<row.getNcols(); i++) {
+				rowTableClientes.add(row.getString(i));
+			}
+			
+		} catch (Exception e) {
+			
+		}
+		return rowTableClientes;
 	}
 
 }

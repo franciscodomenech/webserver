@@ -41,7 +41,7 @@
 	
 	<% 
 	List<String> columns=(List<String>) request.getAttribute("columns");
-	List<Cliente> table=(List<Cliente>) request.getAttribute("table");
+	List<List<String>> table=(List<List<String>>) request.getAttribute("table");
 	%>
 		<table>
 			 <thead>
@@ -60,8 +60,13 @@
 				  	for(int i=0; i<table.size(); i++ ){
 				  %>
 				     <tr>
-						<th><%= table.get(i).getNombre() %></th>
-						<th><%= table.get(i).getApellidos() %></th>
+					  <%
+					  	for(int j=0; j<table.get(i).size(); j++ ){
+					  %>
+					     <th><%= table.get(i).get(j) %></th>
+					  <%
+					  	}
+					  %>
 				     </tr>
 				  <%
 				  	}

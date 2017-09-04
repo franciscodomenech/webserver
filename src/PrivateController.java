@@ -66,7 +66,7 @@ public class PrivateController extends HttpServlet {
 		}
 	}
 	
-	private void loadviewprivate(List<ItemMenu> menu,List<String> columns,List<Cliente> table,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void loadviewprivate(List<ItemMenu> menu,List<String> columns,List<List<String>> table,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher rd = request.getRequestDispatcher("/private.jsp");
 		request.setAttribute("menu", menu);
 		request.setAttribute("columns", columns);
@@ -75,8 +75,8 @@ public class PrivateController extends HttpServlet {
 	}
 	
 	private void showclientes(List<ItemMenu> menu,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<String> columns=new TableClientes().getColumnsHeaders();
-		ArrayList<Cliente> table=new TableClientes().get();
+		List<String> columns=new TableClientes().getColumnsHeaders();
+		List<List<String>> table=new TableClientes().get();
 		loadviewprivate(menu,columns,table,request,response);
 	}
 	

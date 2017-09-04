@@ -2,14 +2,21 @@ package utils;
 
 public class RowResultSql {
 	private String[] _cols;
+	private int _nCols=0;
 	
 	public RowResultSql(int nc) {
 		_cols = new String[nc];
 	}
 	
 	public void addCol(int p,String v) {
-		if(p<_cols.length && p>-1)
+		if(p<_cols.length && p>-1) {
 			_cols[p] = v;
+			_nCols++;
+		}
+	}
+	
+	public int getNcols() {
+		return _nCols;
 	}
 	
 	public String getString(int p) {
