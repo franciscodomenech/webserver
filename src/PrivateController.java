@@ -12,8 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.Usuario;
+import model.Articulo;
+import model.Cliente;
 import model.ItemMenu;
 import model.Menu;
+import model.Tablas;
 
 /**
  * Servlet implementation class PrivateController
@@ -23,6 +26,7 @@ public class PrivateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private Usuario user;
+	private String nomUsu;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -39,6 +43,7 @@ public class PrivateController extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		user = (Usuario) session.getAttribute("u");
+		nomUsu = (String) session.getAttribute("usuario");
 		if(user==null)
 			logout(request,response);
 		else
@@ -48,8 +53,10 @@ public class PrivateController extends HttpServlet {
 	
 	private void manageOp(String op,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<ItemMenu> menu = Menu.get(user.get_tipo());
+		//Establece la opción, si es nula, obtiene del primer elemento del menú. Si no, el correspondiente al elemento del menú seleccionado.
 		int status = op==null?menu.get(0).getOp():Integer.parseInt(op);
 		RequestDispatcher rd = request.getRequestDispatcher("/private.jsp");
+		
 		switch(status) {
 		case ItemMenu.CLIENTES:
 			showclientes(menu,request,response);
@@ -63,7 +70,7 @@ public class PrivateController extends HttpServlet {
 		}
 	}
 	
-	private void loadviewprivate(List<ItemMenu> menu,List<String> columns,List<List<String>> table,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void loadviewprivate(List<ItemMenu> menu,List<String> columns,List table,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher rd = request.getRequestDispatcher("/private.jsp");
 		request.setAttribute("menu", menu);
 		request.setAttribute("columns", columns);
@@ -72,11 +79,13 @@ public class PrivateController extends HttpServlet {
 	}
 	
 	private void showclientes(List<ItemMenu> menu,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		loadviewprivate(menu,null,null,request,response);
+		List<Cliente> listado = Tablas.getClientes();
+		loadviewprivate(menu,null,listado,request,response);
 	}
 	
 	private void showarts(List<ItemMenu> menu,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		loadviewprivate(menu,null,null,request,response);
+		List<Articulo> listado = Tablas.getArticulos(nomUsu, user.get_tipo());
+		loadviewprivate(menu,null,listado,request,response);
 	}
 	
 	private void logout(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
