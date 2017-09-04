@@ -1,6 +1,7 @@
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -12,8 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.Usuario;
+import model.Cliente;
 import model.ItemMenu;
 import model.Menu;
+import model.TableClientes;
 
 /**
  * Servlet implementation class PrivateController
@@ -63,7 +66,7 @@ public class PrivateController extends HttpServlet {
 		}
 	}
 	
-	private void loadviewprivate(List<ItemMenu> menu,List<String> columns,List<List<String>> table,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void loadviewprivate(List<ItemMenu> menu,List<String> columns,List<Cliente> table,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher rd = request.getRequestDispatcher("/private.jsp");
 		request.setAttribute("menu", menu);
 		request.setAttribute("columns", columns);
@@ -72,7 +75,9 @@ public class PrivateController extends HttpServlet {
 	}
 	
 	private void showclientes(List<ItemMenu> menu,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		loadviewprivate(menu,null,null,request,response);
+		ArrayList<String> columns=new TableClientes().getColumnsHeaders();
+		ArrayList<Cliente> table=new TableClientes().get();
+		loadviewprivate(menu,columns,table,request,response);
 	}
 	
 	private void showarts(List<ItemMenu> menu,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

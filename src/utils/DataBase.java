@@ -16,7 +16,7 @@ public class DataBase {
 	
 	private final static String URL = "jdbc:mysql://localhost:3306/portal";
 	private final static String USER = "root";
-	private final static String PASS = "test1234";
+	private final static String PASS = "";
 	
 	private static Connection conn;
 	
@@ -90,10 +90,11 @@ public class DataBase {
 		init();
 		if(conn!=null) {
 			PreparedStatement prep = (PreparedStatement) conn.prepareStatement(sql);
-			for(int i=0;i<bind.size();i++) {
-				BindValue val = bind.get(i);
-				int p = i+1;
-				switch(val.getType()) {
+			if(bind!=null) {
+				for(int i=0;i<bind.size();i++) {
+					BindValue val = bind.get(i);
+					int p = i+1;
+					switch(val.getType()) {
 					case INTEGER:
 						prep.setInt(p,Integer.parseInt(val.getValue()));
 						break;
@@ -103,6 +104,7 @@ public class DataBase {
 					case FLOAT:
 						prep.setFloat(p,Float.parseFloat(val.getValue()));
 						break;
+					}
 				}
 			}
 			return prep;
