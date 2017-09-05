@@ -20,20 +20,9 @@
 		<% } %>
 		</ul>
 	</div>
-	<% if(request.getParameter("op") == "0"){ %>
+	
 	<div>
 		<table>
-			<thead><tr>
-				<%
-		
-					List<String> nombres = (List<String>)request.getAttribute("columns");
-					for(int i=0;i<nombres.size();i++){
-					%>
-						<th><%=nombres.get(i)%></th>
-					
-				<% } %>
-			</tr></thead>
-			<tbody>
 			<%
 				List<ITabla> tabla = (List<ITabla>) request.getAttribute("table");
 				for(int i=0;i<tabla.size();i++){
@@ -49,11 +38,7 @@
 				<%
 				}
 			%>
-			</tbody>
 		</table>
 	</div>
-	<%}else{ %>
-	<div><%=request.getParameter("op") %></div>
-	<%} %>
 </body>
 </html>
