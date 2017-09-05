@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="java.util.List,java.util.ArrayList,model.ItemMenu,model.Tablas,model.ITabla"%>
+    pageEncoding="ISO-8859-1" import="java.util.List,java.util.ArrayList,model.ItemMenu,model.ITabla"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -20,7 +20,7 @@
 		<% } %>
 		</ul>
 	</div>
-	
+	<% if(request.getParameter("op") == "0"){ %>
 	<div>
 		<table>
 			<thead><tr>
@@ -52,5 +52,8 @@
 			</tbody>
 		</table>
 	</div>
+	<%}else{ %>
+	<div><%=request.getParameter("op") %></div>
+	<%} %>
 </body>
 </html>
