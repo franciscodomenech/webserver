@@ -70,27 +70,29 @@ public class PrivateController extends HttpServlet {
 		}
 	}
 	
-	private void loadviewprivate(List<ItemMenu> menu,List<String> columns,List table,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/private.jsp");
-		request.setAttribute("menu", menu);
-		request.setAttribute("columns", columns);
-		request.setAttribute("table", table);
-		rd.forward(request, response);
-	}
-	
 	private void showclientes(List<ItemMenu> menu,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Cliente> listado = Tablas.getClientes();
-		loadviewprivate(menu,null,listado,request,response);
+		List<Cliente> listado =  Tablas.getClientes();
+		List<String> nombres = (List<String>) Tablas.getNomCols("clientes");
+		loadviewprivate(menu,nombres,listado,request,response);
 	}
 	
 	private void showarts(List<ItemMenu> menu,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<Articulo> listado = Tablas.getArticulos(nomUsu, user.get_tipo());
-		loadviewprivate(menu,null,listado,request,response);
+		List<String> nombres = (List<String>) Tablas.getNomCols("articulos");
+		loadviewprivate(menu,nombres,listado,request,response);
 	}
 	
 	private void logout(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
 		request.getSession().setAttribute("u", null);
+		rd.forward(request, response);
+	}
+	
+	private void loadviewprivate(List<ItemMenu> menu,List<String> columns,List table,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		RequestDispatcher rd = request.getRequestDispatcher("/private.jsp");
+		request.setAttribute("menu", menu);
+		request.setAttribute("columns", columns);
+		request.setAttribute("table", table);
 		rd.forward(request, response);
 	}
 

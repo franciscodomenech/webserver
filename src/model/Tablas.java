@@ -64,4 +64,24 @@ public class Tablas {
 		
 		return listado;
 	}
+	
+	public static ArrayList<String> getNomCols(String nomTabla) {
+		ArrayList<String> nombres = new ArrayList<String>();
+		
+		switch(nomTabla) {
+		case "clientes":
+			nombres.add("Id");
+			nombres.add("Nombre");
+			nombres.add("Apellidos");
+			nombres.add("Email");
+			break;
+		case "articulos":
+			nombres.add("Ref");
+			nombres.add("Nombre");
+			nombres.add("Categoria");
+			nombres.add("Precio");
+			break;
+		}
+		return nombres;
+	}
 }

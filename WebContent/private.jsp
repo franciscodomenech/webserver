@@ -23,6 +23,16 @@
 	
 	<div>
 		<table>
+			<tr>
+				<%
+		
+					List<String> nombres = (List<String>)request.getAttribute("columns");
+					for(int i=0;i<nombres.size();i++){
+					%>
+						<th><%=nombres.get(i)%></th>
+					
+				<% } %>
+			</tr>
 			<%
 				List<ITabla> tabla = (List<ITabla>) request.getAttribute("table");
 				for(int i=0;i<tabla.size();i++){
