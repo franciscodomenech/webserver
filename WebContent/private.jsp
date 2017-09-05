@@ -23,7 +23,7 @@
 	
 	<div>
 		<table>
-			<tr>
+			<thead><tr>
 				<%
 		
 					List<String> nombres = (List<String>)request.getAttribute("columns");
@@ -32,7 +32,8 @@
 						<th><%=nombres.get(i)%></th>
 					
 				<% } %>
-			</tr>
+			</tr></thead>
+			<tbody>
 			<%
 				List<ITabla> tabla = (List<ITabla>) request.getAttribute("table");
 				for(int i=0;i<tabla.size();i++){
@@ -48,6 +49,7 @@
 				<%
 				}
 			%>
+			</tbody>
 		</table>
 	</div>
 </body>

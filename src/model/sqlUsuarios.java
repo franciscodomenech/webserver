@@ -9,7 +9,7 @@ import utils.DataBase;
 import utils.RowResultSql;
 import utils.RowsResultSql;
 
-public class Usuarios {
+public class sqlUsuarios {
 	
 	public static Usuario login(String u,String p) {
 		Usuario user = null;
@@ -22,7 +22,7 @@ public class Usuarios {
 			if(rows.size()>0) {
 				RowResultSql row = rows.get(0);
 				try {
-					user = new Usuario(row.getInt(0),row.getInt(1));
+					user = new Usuario(row.getInt(0),row.getInt(1),u);
 				} catch (Exception e) {
 				}
 			}

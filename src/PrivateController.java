@@ -16,7 +16,8 @@ import model.Articulo;
 import model.Cliente;
 import model.ItemMenu;
 import model.Menu;
-import model.Tablas;
+import model.sqlClientes;
+import model.sqlArticulos;
 
 /**
  * Servlet implementation class PrivateController
@@ -71,14 +72,14 @@ public class PrivateController extends HttpServlet {
 	}
 	
 	private void showclientes(List<ItemMenu> menu,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Cliente> listado =  Tablas.getClientes();
-		List<String> nombres = (List<String>) Tablas.getNomCols("clientes");
+		List<Cliente> listado =  sqlClientes.getClientes();
+		List<String> nombres = (List<String>) sqlClientes.getNomCols();
 		loadviewprivate(menu,nombres,listado,request,response);
 	}
 	
 	private void showarts(List<ItemMenu> menu,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Articulo> listado = Tablas.getArticulos(nomUsu, user.get_tipo());
-		List<String> nombres = (List<String>) Tablas.getNomCols("articulos");
+		List<Articulo> listado = sqlArticulos.getArticulos(nomUsu, user.get_tipo());
+		List<String> nombres = (List<String>) sqlArticulos.getNomCols();
 		loadviewprivate(menu,nombres,listado,request,response);
 	}
 	

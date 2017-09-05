@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.Usuario;
-import model.Usuarios;
+import model.sqlUsuarios;
 
 /**
  * Servlet implementation class LoginServlet
@@ -33,7 +33,7 @@ public class LoginController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String user = request.getParameter("u");
 		String pass = request.getParameter("p");
-		Usuario u = Usuarios.login(user, pass);
+		Usuario u = sqlUsuarios.login(user, pass);
 		if (u==null) {
 			RequestDispatcher rd = request.getRequestDispatcher("/error.jsp");
 			rd.forward(request, response);
