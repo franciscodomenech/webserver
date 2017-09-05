@@ -8,6 +8,19 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>Ejemplo WebServer</title>
 	<style>
+		#menu{
+			float: left;
+			
+		}
+		#menu ul{
+			margin: 0px 16px;
+		}
+		#tabla{
+   			 margin:16px;
+ 		}
+ 		table,thead, tbody, tr{
+ 			width:70%
+ 		}
 		table * {
 			border: 1px solid gray;
 		}
@@ -15,6 +28,7 @@
 		table{
 			 border-spacing: 0px;
    			 border-collapse: collapse;
+
 		}
 		thead *{
 			font-weight: bold;
