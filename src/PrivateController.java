@@ -12,8 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.Usuario;
+import model.Articulos;
+import model.Cliente;
+import model.Clientes;
 import model.ItemMenu;
 import model.Menu;
+import model.RowTable;
 
 /**
  * Servlet implementation class PrivateController
@@ -63,20 +67,25 @@ public class PrivateController extends HttpServlet {
 		}
 	}
 	
-	private void loadviewprivate(List<ItemMenu> menu,List<String> columns,List<List<String>> table,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void loadviewprivate(List<ItemMenu> menu,String[] strings,RowTable[] table,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher rd = request.getRequestDispatcher("/private.jsp");
 		request.setAttribute("menu", menu);
-		request.setAttribute("columns", columns);
+		request.setAttribute("columns", strings);
 		request.setAttribute("table", table);
 		rd.forward(request, response);
 	}
 	
 	private void showclientes(List<ItemMenu> menu,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		loadviewprivate(menu,null,null,request,response);
+		Clientes clientes = new Clientes();
+		loadviewprivate(menu,clientes.getColumns(),clientes.list(),request,response);
 	}
 	
 	private void showarts(List<ItemMenu> menu,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		loadviewprivate(menu,null,null,request,response);
+		Articulos articulos = new Articulos();
+		if(user.get_tipo()==Usuario.ADMIN)
+			loadviewprivate(menu,articulos.getColumns(),articulos.listAll(),request,response);
+		else
+			loadviewprivate(menu,articulos.getColumns(),articulos.filterCats(((Cliente)user).getPrefs()),request,response);
 	}
 	
 	private void logout(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {

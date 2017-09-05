@@ -60,7 +60,7 @@ public class DataBase {
 				prep.close();
 			}
 		} catch (SQLException e) {
-			throw new IllegalStateException("Sql error!", e);
+			throw new IllegalStateException("Sql error! "+sql, e);
 		}finally {
 			close();
 		}
@@ -86,28 +86,33 @@ public class DataBase {
 		return result;
 	}
 	
-	private PreparedStatement preparaquery(String sql,List<BindValue> bind) throws SQLException {
+	private PreparedStatement preparaquery(String sql,List<BindValue> params) throws SQLException {
 		init();
 		if(conn!=null) {
 			PreparedStatement prep = (PreparedStatement) conn.prepareStatement(sql);
-			for(int i=0;i<bind.size();i++) {
-				BindValue val = bind.get(i);
-				int p = i+1;
-				switch(val.getType()) {
-					case INTEGER:
-						prep.setInt(p,Integer.parseInt(val.getValue()));
-						break;
-					case STRING:
-						prep.setString(p,val.getValue());
-						break;
-					case FLOAT:
-						prep.setFloat(p,Float.parseFloat(val.getValue()));
-						break;
-				}
-			}
+			if(params!=null)
+				bindparams(prep,params);
 			return prep;
 		}else
 			return null;
+	}
+	
+	private void bindparams(PreparedStatement prep,List<BindValue> params) throws NumberFormatException, SQLException {
+		for(int i=0;i<params.size();i++) {
+			BindValue param = params.get(i);
+			int p = i+1;
+			switch(param.getType()) {
+			case INTEGER:
+				prep.setInt(p,Integer.parseInt(param.getValue()));
+				break;
+			case STRING:
+				prep.setString(p,param.getValue());
+				break;
+			case FLOAT:
+				prep.setFloat(p,Float.parseFloat(param.getValue()));
+				break;
+			}
+		}
 	}
 	
 }

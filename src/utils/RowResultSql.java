@@ -27,4 +27,8 @@ public class RowResultSql {
 		return Float.parseFloat(_cols[p]);
 	}
 	
+	public String[] getCols() {
+		return _cols;
+	}
+	
 }

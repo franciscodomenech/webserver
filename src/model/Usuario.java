@@ -6,7 +6,7 @@ public class Usuario {
 	public static final int CLIENTE = 1;
 	
 	private int _tipo;
-	private int _id;
+	protected int _id;
 	public Usuario(int _id,int _tipo) {
 		super();
 		this._tipo = _tipo;

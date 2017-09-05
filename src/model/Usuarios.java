@@ -22,7 +22,11 @@ public class Usuarios {
 			if(rows.size()>0) {
 				RowResultSql row = rows.get(0);
 				try {
-					user = new Usuario(row.getInt(0),row.getInt(1));
+					int tipo = row.getInt(1);
+					if(tipo==Usuario.ADMIN)
+						user = new Usuario(row.getInt(0),tipo);
+					else
+						user = new Cliente(row.getInt(0),tipo);
 				} catch (Exception e) {
 				}
 			}
